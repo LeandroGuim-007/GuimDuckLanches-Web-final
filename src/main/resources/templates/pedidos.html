@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Pedidos</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}"/>
+        <link rel="stylesheet" th:href="@{/css/barraStyle.css}"/>
+        <link rel="stylesheet" th:href="@{/css/caixaStyle.css}"/>
+    </head>
+    <body>
+
+        <div class="sidebar">
+            <div th:insert="barraNavegacao.html :: sidebar"></div>
+        </div> 
+        <div class = "container pt-4 conteudo">                
+            <table class = "tabela table table-bordered table-striped"> 
+                <thead> 
+                    <tr>  
+                        <th>Cliente</th> 
+                        <th>Produto</th> 
+                        <th>Valor</th> 
+                        <th>Data da venda</th> 
+                        <th>Entregar?</th> 
+                        <th>Status</th> 
+                        <th>Operações</th>
+                    </tr> 
+                </thead> 
+                <tbody> 
+                    <tr th:each="pedido : ${pedidos}"> 
+
+                        <td th:text="${pedido.cliente.nome}"></td>
+                        <td th:text="${pedido.quantidade} + 'X - ' + ${pedido.produto.nome}"></td> 
+                        <td th:text="'R$' + ${pedido.valor}"></td>
+                        <td th:text="${#temporals.format(pedido.dataVenda, 'dd/MM/yyyy')}"></td> 
+                        <td th:text="${pedido.paraEntregar ? 'Sim' : 'Não'}"></td> 
+                        <td th:text="${pedido.status ? 'Finalizado' : 'Em aberto'}"></td>
+
+                        <td>
+                            <a th:href="@{/pedidos/detalhes/{id}(id=${pedido.id})}" class="btn btn-warning btn-sm">
+                                Cliente
+                            </a>
+                            <a th:href="@{/pedidos/excluir/{id}(id=${pedido.id})}" class="btn btn-danger btn-sm"
+                               onclick="return confirm('Deseja realmente excluir?');">
+                                Excluir
+                            </a>
+                            <a th:href="@{/pedidos/finalizar/{id}(id=${pedido.id})}" class="btn btn-info btn-sm">
+                                Finalizar
+                            </a>
+                        </td>
+                    </tr> 
+                    <tr th:if="${#lists.isEmpty(pedidos)}">
+                        <td colspan="7" class="text-center text-muted">
+                            Nenhum pedido encontrado
+                        </td>
+                    </tr>
+                </tbody> 
+            </table> 
+        </div>
+    </body>
+</html>

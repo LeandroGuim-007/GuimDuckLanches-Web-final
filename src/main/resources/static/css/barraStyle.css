@@ -1,0 +1,47 @@
+.sidebar{
+    position: fixed;
+    width: 23%;
+    max-width: 300px;
+    height: 100vh;
+    background: linear-gradient(to bottom, yellow, red);
+    gap: 40px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: space-between;
+}
+
+.miniLogo{
+    width: 70%;
+    display: block;
+    margin: 0 auto
+}
+
+.texto{
+    font-size: large;
+    gap: 15px;
+    margin-top: 40px
+}
+
+.botao{
+    margin: 10px;
+    width: 90%;
+    background: transparent;
+    color: black;
+    border: 1px solid black;
+}
+
+.nav-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+}
+
+.menu-icon-img {
+    position: absolute;
+    left: 15px;
+    width: 35px;
+    height: 35px;
+}

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Cadastro produto</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}"/>
+        <link rel="stylesheet" th:href="@{/css/barraStyle.css}"/>
+        <link rel="stylesheet" th:href="@{/css/caixaStyle.css}"/>
+    </head>
+    <body>
+
+        <div class="sidebar">
+            <div th:insert="barraNavegacao.html :: sidebar"></div>
+        </div>
+        <div class="container-form conteudo">
+            <div class="form-wrapper">
+
+                <div class="mb-4">
+                    <label class="form-label fw-bold">Tipo de produto</label>
+                    <select id="tipoProduto" class="form-select" onchange="trocarFormulario()">
+                        <option value="">Selecione</option>
+                        <option value="bebida">Bebida</option>
+                        <option value="lanche">Lanche</option>
+                    </select>
+                </div>
+
+                <form th:action="@{/adicionarBebida}"
+                      th:object="${bebida}"
+                      method="post"
+                      enctype="multipart/form-data"
+                      id="formBebida"
+                      class="d-none">
+
+                    <div class="row g-4 align-items-center">
+
+                        <div class="col-md-4 d-flex justify-content-center">
+                            <div class="text-center">
+                                <label class="form-label fw-bold">Adicionar imagem</label>
+                                <div class="upload-box mt-2">
+                                    <input type="file" id="imagemBebida" name="imagemFile" hidden accept="image/*" onchange="previewImagem(event, 'previewBebida')" required>
+
+                                        <label for="imagemBebida" class="upload-label">
+                                            <img id="previewBebida" th:src="@{/imagens/Upload.png}" alt="Upload" class="img-fluid">
+                                        </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-8">
+                            <div class="mb-3">
+                                <label class="form-label">Nome</label>
+                                <input type="text" class="form-control" th:field="*{nome}" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Valor</label>
+                                <input type="number" class="form-control" th:field="*{valor}" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">MLs</label>
+                                <input type="number" class="form-control" th:field="*{mls}" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Sabor</label>
+                                <input type="text" class="form-control" th:field="*{sabor}" required>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row g-4 mt-2 align-items-center">
+
+                        <div class="col-md-6">
+                            <label class="form-label">Marca (ou Natural)</label>
+                            <div class="input-align">
+                                <input type="text" class="form-control" th:field="*{marca}" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 d-flex align-items-end justify-content-center gap-5">
+                            <div class="form-check">
+                                <label class="form-check-label" for="gas">
+                                    <input class="form-check-input" type="checkbox" id="gas" th:field="*{comGas}">
+                                        Com gás?
+                                </label>
+                            </div>
+
+                            <div class="form-check">
+                                <label class="form-check-label" for="alcool">
+                                    <input class="form-check-input" type="checkbox" id="alcool" th:field="*{comAlcool}">
+                                        Com álcool?
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="mt-4">
+                        <label class="form-label">Informações nutricionais</label>
+                        <textarea class="form-control" rows="3" th:field="*{informacaoNutricional}" required></textarea>
+                    </div>
+
+                    <div class="d-flex justify-content-between mt-4">
+                        <button type="reset" class="btn btn-danger">Limpar cadastro</button>
+                        <button type="submit" class="btn btn-warning">Enviar</button>
+                    </div>
+
+                </form>
+
+                <form th:action="@{/adicionarLanche}"
+                      th:object="${lanche}"
+                      method="post"
+                      enctype="multipart/form-data"
+                      id="formLanche"
+                      class="d-none">
+
+                    <div class="row g-4 align-items-center">
+                        <div class="col-md-4 d-flex justify-content-center">
+                            <div class="text-center">
+                                <label class="form-label fw-bold">Adicionar imagem</label>
+                                <div class="upload-box mt-2">
+                                    <input type="file" id="imagemLanche" name="imagemFile" hidden accept="image/*" onchange="previewImagem(event, 'previewLanche')" required>
+
+                                        <label for="imagemLanche" class="upload-label">
+                                            <img id="previewLanche" th:src="@{/imagens/Upload.png}" alt="Upload" class="img-fluid">
+                                        </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-8">
+                            <div class="mb-3">
+                                <label class="form-label">Nome</label>
+                                <input type="text" class="form-control" th:field="*{nome}" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Valor</label>
+                                <input type="number" class="form-control" th:field="*{valor}" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Peso</label>
+                                <input type="number" class="form-control" th:field="*{peso}" required>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="mt-3">
+                        <label class="form-label">Ingredientes</label>
+                        <textarea class="form-control" rows="2" required th:field="*{ingredientes}"></textarea>
+                    </div>
+
+                    <div class="mt-3">
+                        <label class="form-label">Informações nutricionais</label>
+                        <textarea class="form-control" rows="3" required th:field="*{informacaoNutricional}"></textarea>
+                    </div>
+
+                    <div class="d-flex justify-content-between mt-4">
+                        <button type="reset" class="btn btn-danger">Limpar cadastro</button>
+                        <button type="submit" class="btn btn-warning">Enviar</button>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <script>
+            function selecionarTipo(tipo) {
+                document.getElementById('tipoSelect').value = tipo;
+                trocarFormulario();
+            }
+
+            function trocarFormulario() {
+                const tipo = document.getElementById('tipoProduto').value;
+
+                document.getElementById('formBebida').classList.add('d-none');
+                document.getElementById('formLanche').classList.add('d-none');
+
+                if (tipo === 'bebida') {
+                    document.getElementById('formBebida').classList.remove('d-none');
+                } else if (tipo === 'lanche') {
+                    document.getElementById('formLanche').classList.remove('d-none');
+                }
+            }
+
+            function previewImagem(event, previewId) {
+                const input = event.target;
+                const preview = document.getElementById(previewId);
+
+                if (input.files && input.files[0]) {
+                    const reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        preview.src = e.target.result;
+                    };
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+        </script>
+
+    </body>
+</html>

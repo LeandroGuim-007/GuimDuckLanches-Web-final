@@ -1,0 +1,152 @@
+.conteudo {
+    margin-left: min(23vw, 300px);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+
+.container-form {
+    height: 100vh;
+    background: white;
+    padding: 30px;
+}
+
+.total-display {
+    background-color: #ff6600;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.container-form input,
+.container-form select {
+    margin-bottom: 15px;
+}
+
+.btn-confirm {
+    background-color: #28a745;
+    color: white;
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-confirm:hover {
+    background-color: #218838;
+}
+
+
+.upload-box {
+    width: 140px;
+    height: 140px;
+    border: 2px dashed #ccc;
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+}
+
+.upload-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.form-wrapper {
+    width: 100%;
+    max-width: 700px;
+}
+
+.input-align {
+    height: 38px;
+    display: flex;
+    align-items: center;
+}
+
+.form-check {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.form-check-label {
+    line-height: 1;
+}
+
+.form-check-input {
+    margin-top: 0;
+}
+
+.tabela{
+    margin-left: min(23vw, 300px);
+}
+
+.filtros {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.checkboxes label {
+    margin-right: 15px;
+    font-size: 14px;
+}
+
+.ordenar {
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.produtos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+.card {
+    width: 30%;
+    min-width: 150px;
+    max-width: 200px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: transform 0.2s;
+}
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card-img{
+    max-width: 900px;
+    object-fit:cover;
+}
+
+.cardapio{
+    margin-left: min(23vw, 300px);
+}

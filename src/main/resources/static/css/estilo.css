@@ -1,0 +1,22 @@
+.formulario {
+    background: linear-gradient(to bottom, yellow, red);
+    min-height: 100vh;
+}
+
+.formulario form{
+    padding: 50px;
+}
+
+.logoInicial {
+    border: 3px solid black;
+    padding: 10px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    width: 90%;
+    height: 90%;
+    margin: 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,0 +1,61 @@
+<div th:fragment="sidebar"
+     xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <div class="d-flex sidebar">
+        <div class="espaco">
+            <div class="text-white p-3 navBar">
+                <img th:src="@{/imagens/logo.png}" alt="Logo" class="miniLogo"/>
+            </div>
+
+            <ul class="nav flex-column texto">
+
+                <li class="nav-item"
+                    sec:authorize="hasAnyRole('ADMIN','VENDEDOR')">
+                    <a class="nav-link text-black" th:href="@{/caixa}">
+                        <img th:src="@{/imagens/caixa.png}" class="menu-icon-img">
+                        <span>Caixa</span>
+                    </a>
+                </li>
+
+                <li class="nav-item"
+                    sec:authorize="isAuthenticated()">
+                    <a class="nav-link text-black" th:href="@{/cardapio}">
+                        <img th:src="@{/imagens/cardapio.png}" class="menu-icon-img">
+                        <span>Cardápio</span>
+                    </a>
+                </li>
+
+                <li class="nav-item"
+                    sec:authorize="hasAnyRole('ADMIN','VENDEDOR')">
+                    <a class="nav-link text-black" th:href="@{/cadastroCliente}">
+                        <img th:src="@{/imagens/User.png}" class="menu-icon-img">
+                        <span>Cadastrar clientes</span>
+                    </a>
+                </li>
+
+                <li class="nav-item"
+                    sec:authorize="hasRole('ADMIN')">
+                    <a class="nav-link text-black" th:href="@{/cadastroProdutos}">
+                        <img th:src="@{/imagens/cadastroLanches.png}" class="menu-icon-img">
+                        <span>Cadastrar produtos</span>
+                    </a>
+                </li>
+
+                <li class="nav-item"
+                    sec:authorize="hasRole('ADMIN')">
+                    <a class="nav-link text-black" th:href="@{/pedidos}">
+                        <img th:src="@{/imagens/pedidos.png}" class="menu-icon-img">
+                        <span>Pedidos</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+
+        <div>
+            <form th:action="@{/logout}" method="post">
+                <button class="btn botao" type="submit">Sair</button>
+            </form>
+        </div>
+    </div>
+</div>

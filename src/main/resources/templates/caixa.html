@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+      
+    <head>
+        <title>Caixa</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+        <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}"/>
+        <link rel="stylesheet" th:href="@{/css/barraStyle.css}"/>
+        <link rel="stylesheet" th:href="@{/css/caixaStyle.css}"/>
+    </head>
+    <body>
+
+        <div class="sidebar"> <div th:insert="barraNavegacao.html :: sidebar"></div> </div>
+
+        <div class="container-form conteudo">
+
+            <form th:action="@{/cadastrarCompra}" th:object="${pedido}" method="post">
+
+
+                <div class="mb-3">
+                    <label for="produto" class="form-label">Selecione o produto</label>
+                    <select name="produtoID" class="form-select" id="produto" onchange="calcularTotal()" required>
+                        <option value="" selected disabled>Selecione...</option>
+                        <option th:each="produto: ${listaProdutos}" th:value="${produto.id}" th:text="${produto.nome}" th:data-valor="${produto.valor}"></option>
+                    </select>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="quantidade" class="form-label">Quantidade</label>
+                        <input type="number" class="form-control" th:field="*{quantidade}" id="quantidade" placeholder="0"  min="1"  value="1" oninput="calcularTotal()" required>
+                    </div>
+                    <div class="col">
+                        <label class="form-label">Total</label>
+                        <input type="text" id="total" class="form-control">
+                    </div>
+                    <div class="col">
+                        <label for="data" class="form-label">Data</label>
+                        <input type="date" th:field="*{dataVenda}" class="form-control" id="data" required>
+                    </div>
+                </div>
+
+                <div class="form-check mb-3">
+                    <label class="form-check-label" for="entrega">
+                        <input class="form-check-input" th:field="*{paraEntregar}" type="checkbox" id="entrega">
+                            Para entregar?
+                    </label>
+                </div>
+
+                <div class="mb-3">
+                    <label for="cliente" class="form-label">Nome do cliente</label>
+                    <select class="form-select" id="nome" name="clienteID" required>
+                        <option value="" selected disabled>Selecione...</option>
+                        <option th:each="cliente: ${listaClientes}" th:value="${cliente.id}" th:text="${cliente.nome}"></option>
+                    </select>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="pagamento" class="form-label">Forma de pagamento</label>
+                        <select class="form-select" id="pagamento" th:field="*{formaPagamento}" required>
+                            <option value="" selected disabled>Selecione...</option>
+                            <option value="Dinheiro">Dinheiro</option>
+                            <option value="Cartão de crédito">Cartão de crédito</option>
+                            <option value="Cartão de débito">Cartão de débito</option>
+                            <option value="PIX">Pix</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-confirm">Confirmar</button>
+            </form>
+        </div>
+        <script>
+            function calcularTotal() {
+                const select = document.getElementById('produto');
+                const option = select.options[select.selectedIndex];
+
+                const valor =
+                        parseFloat(option.getAttribute('data-valor')) || 0;
+
+                const quantidade =
+                        parseInt(document.getElementById('quantidade').value) || 1;
+
+                const total = valor * quantidade;
+
+                document.getElementById('total').value = "R$ " +
+                        total.toFixed(2).replace('.', ',');
+            }
+        </script>
+    </body>
+</html>
